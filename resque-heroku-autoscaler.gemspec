@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.files                    += Dir.glob("spec/**/*")
 
   s.add_dependency "resque", ">= 1.8"
-  s.add_dependency "heroku-api"
+  s.add_dependency "httparty", "0.14.0"
   s.add_dependency "activesupport"
 
   s.description       = <<desc

@@ -1,4 +1,4 @@
-require 'heroku-api'
+require '../heroku_scale'
 require 'resque/plugins/heroku_autoscaler/config'
 
 module Resque
@@ -28,16 +28,16 @@ module Resque
 
       def set_workers(number_of_workers)
         if number_of_workers != current_workers
-          heroku_api.post_ps_scale(config.heroku_app, 'worker', number_of_workers)
+          heroku_api.scale_to(number_of_workers)
         end
       end
 
       def current_workers
-        heroku_api.get_ps(config.heroku_app).body.count {|p| p['process'].match(/worker\.\d+/) }
+        heroku_api.dyno_count
       end
 
       def heroku_api
-        @heroku_api ||= ::Heroku::API.new(api_key: config.heroku_api_key)
+        @_heroku_api ||= HerokuScale.new('worker')
       end
 
       def self.config
