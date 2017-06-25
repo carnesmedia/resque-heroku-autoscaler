@@ -1,3 +1,5 @@
+require 'httparty'
+
 class HerokuScale
   include HTTParty
   def self.auth

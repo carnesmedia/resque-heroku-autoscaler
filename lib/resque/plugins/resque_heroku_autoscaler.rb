@@ -1,4 +1,4 @@
-require '../heroku_scale'
+require 'heroku_scale'
 require 'resque/plugins/heroku_autoscaler/config'
 
 module Resque
